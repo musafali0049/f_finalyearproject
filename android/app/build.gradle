@@ -1,0 +1,71 @@
+
+plugins {
+    id "com.android.application"
+    //id 'com.google.gms.google-services'
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin" // Flutter Gradle Plugin
+    id "com.google.gms.google-services" // Google Services plugin
+}
+
+android {
+    namespace "com.example.finalfyp"
+    compileSdk 35 // Ensure the latest compileSdk version
+    ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "com.example.finalfyp"
+        minSdkVersion 23
+        targetSdkVersion 35
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+        // Enable multidex if needed
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            // Enable resource shrinking and minification
+            // shrinkResources true  // Remove unused resources
+            // minifyEnabled true    // Enable ProGuard/R8 for code shrinking
+
+            // Add a release signing config if available
+            signingConfig signingConfigs.debug
+            //  proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    // Firebase BoM for managing Firebase dependencies
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+
+    implementation platform("com.google.firebase:firebase-bom:33.8.0")
+
+//    // Firebase Analytics
+//    implementation "com.google.firebase:firebase-analytics"
+//
+//    // Firebase Authentication
+//    implementation "com.google.firebase:firebase-auth"
+//
+//    // Firebase Firestore
+//    implementation "com.google.firebase:firebase-firestore"
+//
+//    // AndroidX dependencies
+//    implementation "androidx.multidex:multidex:2.0.1"
+//    implementation "androidx.core:core-ktx:1.12.0"
+//    implementation "androidx.appcompat:appcompat:1.7.0"
+//    implementation "com.google.android.material:material:1.9.0"
+}

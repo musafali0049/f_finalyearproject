@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "617765138485",
+    "project_id": "docnow-29502",
+    "storage_bucket": "docnow-29502.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617765138485:android:8868f7470d93a46c04417c",
+        "android_client_info": {
+          "package_name": "com.example.finalfyp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617765138485-58ss41h8a7gglrprugapqhdh6072om9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.finalfyp",
+            "certificate_hash": "4800a949e72822f25c51f5610eabacb2e3313b58"
+          }
+        },
+        {
+          "client_id": "617765138485-29e70k250qc6c6l1girtu5jjfvk6c0fp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_T0vRcI0CETxAmjT3_mkHz9M9pPbJiTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617765138485-29e70k250qc6c6l1girtu5jjfvk6c0fp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617765138485-4uj07s7lihbc4u53r91mslnc5gvihrkm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.saimofficial.DocNow"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617765138485:android:072aaa0dcaaeb3b404417c",
+        "android_client_info": {
+          "package_name": "com.saimofficial.DocNow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617765138485-ijuo16ij6vjbjckc0kih4uv0t5sj1n3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saimofficial.DocNow",
+            "certificate_hash": "34824fd271efa70419d5be1f104b26fb1949b7a5"
+          }
+        },
+        {
+          "client_id": "617765138485-kh5scrsqk1ro5kjlvvrguoptooud5q9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saimofficial.DocNow",
+            "certificate_hash": "3922e955c79337b4fde999d5b98e1c0b9a417561"
+          }
+        },
+        {
+          "client_id": "617765138485-29e70k250qc6c6l1girtu5jjfvk6c0fp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_T0vRcI0CETxAmjT3_mkHz9M9pPbJiTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617765138485-29e70k250qc6c6l1girtu5jjfvk6c0fp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "617765138485-4uj07s7lihbc4u53r91mslnc5gvihrkm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.saimofficial.DocNow"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
