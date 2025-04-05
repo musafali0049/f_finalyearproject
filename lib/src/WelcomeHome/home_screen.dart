@@ -155,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     'Pneumonia Detector',
                     style: TextStyle(fontFamily: 'Poppins', fontSize: 30, color: Color(0xFFE3F2FD)),
                   ),
-                  const SizedBox(height: 250),
+                  const SizedBox(height: 200),
                   const Text(
                     'Detect Pneumonia in seconds',
                     style: TextStyle(

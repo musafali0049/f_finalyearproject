@@ -11,8 +11,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:finalfyp/src/Service/permission_services.dart';
+import 'package:flutter/services.dart'; // Import for orientation lock
 
 /// Global navigator key to allow navigation from notification callbacks.
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -65,6 +65,13 @@ class FirebaseInitializer {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Lock the app orientation to portrait only.
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    // Agar aap portraitDown bhi allow karna chahte hain to niche uncomment karen:
+    // DeviceOrientation.portraitDown,
+  ]);
 
   // Initialize Firebase.
   await FirebaseInitializer.initialize();

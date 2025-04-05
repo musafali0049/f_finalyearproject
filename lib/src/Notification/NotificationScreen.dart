@@ -1,25 +1,67 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:finalfyp/src/Service/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-class NotificationScreen extends StatelessWidget {
-  const NotificationScreen({super.key});
+class NotificationScreen extends StatefulWidget {
+  const NotificationScreen({Key? key}) : super(key: key);
+
+  @override
+  _NotificationScreenState createState() => _NotificationScreenState();
+}
+
+class _NotificationScreenState extends State<NotificationScreen> {
+  DateTime? userCreatedAt;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserCreationTime();
+  }
+
+  Future<void> _fetchUserCreationTime() async {
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      final userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(currentUser.uid)
+          .get();
+      if (userDoc.exists) {
+        final userModel =
+        UserModel.fromMap(userDoc.data() as Map<String, dynamic>);
+        setState(() {
+          userCreatedAt = userModel.createdAt;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // For logged-in users, we query the broadcast notifications.
-    final User? currentUser = FirebaseAuth.instance.currentUser;
-    final notificationsRef = FirebaseFirestore.instance
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+    // Base notifications query sorted by descending timestamp.
+    Query notificationsQuery = FirebaseFirestore.instance
         .collection('broadcast_notifications')
         .orderBy('timestamp', descending: true);
+
+    // If we have the user's creation time, filter notifications that are after it.
+    if (userCreatedAt != null) {
+      notificationsQuery = notificationsQuery.where(
+          'timestamp',
+          isGreaterThan: Timestamp.fromDate(userCreatedAt!));
+    }
 
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Notifications',
           style: TextStyle(
-              fontFamily: 'Poppins', fontSize: 25, color: Color(0xFFB0BEC5)),
+            fontFamily: 'Poppins',
+            fontSize: 25,
+            color: Color(0xFFB0BEC5),
+          ),
         ),
         backgroundColor: const Color(0xFF010713),
         centerTitle: true,
@@ -38,7 +80,7 @@ class NotificationScreen extends StatelessWidget {
         ),
         child: SafeArea(
           child: StreamBuilder<QuerySnapshot>(
-            stream: notificationsRef.snapshots(),
+            stream: notificationsQuery.snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
@@ -51,9 +93,10 @@ class NotificationScreen extends StatelessWidget {
                   child: Text(
                     'No notifications received yet.',
                     style: TextStyle(
-                        color: Color(0xFFB0BEC5),
-                        fontFamily: 'PoppinsRegular',
-                        fontSize: 18),
+                      color: Color(0xFFB0BEC5),
+                      fontFamily: 'PoppinsRegular',
+                      fontSize: 18,
+                    ),
                   ),
                 );
               }
@@ -66,7 +109,6 @@ class NotificationScreen extends StatelessWidget {
                   final data = doc.data() as Map<String, dynamic>;
                   final title = data['title'] ?? 'No Title';
                   final body = data['body'] ?? 'No Message';
-                  // For broadcast notifications, check if currentUser has read it.
                   bool isRead = true;
                   if (currentUser != null) {
                     final List<dynamic> readBy = data['readBy'] ?? [];
@@ -83,13 +125,13 @@ class NotificationScreen extends StatelessWidget {
 
                   return InkWell(
                     onTap: () async {
-                      // Mark this broadcast notification as read if not already.
+                      // Mark the notification as read if not already.
                       if (currentUser != null && !isRead) {
                         await doc.reference.update({
                           'readBy': FieldValue.arrayUnion([currentUser.uid])
                         });
                       }
-                      // You can add navigation to a detailed view if needed.
+                      // Optionally navigate to a detailed view.
                     },
                     child: Card(
                       color: isRead
